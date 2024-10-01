@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  jupyter:
+    build:
+      context: .  # This assumes your Dockerfile is in the current directory
+    container_name: jupyter-container
+    ports:
+      - "8889:8888"  # Expose Jupyter on port 8888
+    volumes:
+      - ./notebooks:/home/jovyan/work  # Mount local 'notebooks' directory
+    environment:
+      - JUPYTER_ENABLE_LAB=yes  # Enable Jupyter Lab interface
+      - XDG_RUNTIME_DIR=/tmp/runtime-1000
+      - GRANT_SUDO=yes  # Grant sudo access
+    user: root  # Run as root during installation
